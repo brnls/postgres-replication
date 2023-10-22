@@ -1,0 +1,30 @@
+---
+version: '3'
+services:
+  db-11:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '8000:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./publisher.conf:/var/lib/postgresql/data/postgresql.conf
+
+  db-14:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '8001:5432'
+    volumes: 
+      - db-new:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
+  db-new:
+    driver: local
